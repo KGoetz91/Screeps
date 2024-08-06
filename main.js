@@ -2,12 +2,19 @@ var roleHarvester = require('role.Harvester');
 var roleUpgrader = require('role.Upgrader');
 var roleBuilder = require('role.Builder');
 
+var ticker = 0;
+
 module.exports.loop = function () {
+
+    if (ticker == 60){
+        console.log('Harvesters: ' + harvesters.length);
+        ticker = 0;
+    }
 
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     var inactive_spawns = _.filter(Game.spawns, (spawn) => spawn.isActive())
     var spawning_spawns = _.filter(Game.spawns, (spawn) => spawn.spawning)
-    console.log('Harvesters: ' + harvesters.length);
+
 
     if(harvesters.length < 2 && inactive_spawns.length >0){
         var newName = 'Harvester' + Game.time;
@@ -38,4 +45,7 @@ module.exports.loop = function () {
             roleBuilder.run(creep);
         }
     }
+    
+    ticker += 1;
 }
+
