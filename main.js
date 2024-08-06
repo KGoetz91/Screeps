@@ -8,7 +8,7 @@ module.exports.loop = function () {
     var inactive_spawns = _.filter(Game.spawns, (spawn) => spawn.isActive())
     console.log('Harvesters: ' + harvesters.length);
 
-    if(harvesters.length < 2) && (inactive_spawns.length >0){
+    if(harvesters.length < 2 && inactive_spawns.length >0){
         var newName = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newName);
         var spawn = spawns
