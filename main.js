@@ -5,12 +5,14 @@ var roleBuilder = require('role.Builder');
 module.exports.loop = function () {
 
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+    var inactive_spawns = _.filter(Game.spawns, (spawn) => spawn.isActive())
     console.log('Harvesters: ' + harvesters.length);
 
-    if(harvesters.length < 2) {
+    if(harvesters.length < 2) && (inactive_spawns.length >0){
         var newName = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newName);
-        Game.spawns['Frumpf'].spawnCreep([WORK,CARRY,MOVE], newName,
+        var spawn = spawns
+        Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName,
             {memory: {role: 'harvester'}});
     }
 
